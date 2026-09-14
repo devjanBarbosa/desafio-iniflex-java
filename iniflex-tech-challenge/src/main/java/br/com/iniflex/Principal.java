@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Principal {
     public static void main(String[] args) {
@@ -42,5 +44,36 @@ public class Principal {
                     f.getFuncao(),
                     formatadorSalario.format(f.getSalario())));
         }
+
+        BigDecimal multiplicador = new BigDecimal("1.10");
+
+
+// 3.4 - Aplicar 10% de aumento de salário
+        BigDecimal fatorAumento = new BigDecimal("1.10");
+        for (Funcionario f : funcionarios) {
+            f.setSalario(f.getSalario().multiply(fatorAumento));
+        }
+
+        // 3.5 - Agrupar funcionários por função num Map
+        Map<String, List<Funcionario>> funcionariosPorFuncao = funcionarios.stream()
+                .collect(Collectors.groupingBy(Funcionario::getFuncao));
+
+        // 3.6 - Imprimir os funcionários agrupados por função
+        System.out.println("\n--- FUNCIONÁRIOS AGRUPADOS POR FUNÇÃO (COM 10% DE AUMENTO) ---");
+        for (Map.Entry<String, List<Funcionario>> entry : funcionariosPorFuncao.entrySet()) {
+            System.out.println("\nFunção: " + entry.getKey());
+            for (Funcionario f : entry.getValue()) {
+                System.out.println(String.format("  Nome: %-10s | Data Nasc: %s | Salário: R$ %s",
+                        f.getNome(),
+                        f.getDataNascimento().format(formatadorData),
+                 git add .
+git commit -m "feat: aplica reajuste salarial de 10% e agrupa funcionarios por funcao"       formatadorSalario.format(f.getSalario())));
+            }
+        }
+
+        
+
     }
+
+    
 }
