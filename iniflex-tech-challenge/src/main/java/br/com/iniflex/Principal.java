@@ -1,13 +1,13 @@
 package br.com.iniflex;
 
 import br.com.iniflex.model.Funcionario;
-import br.com.service.FuncionarioService;
+import br.com.iniflex.repository.FuncionarioRepository;
+import br.com.iniflex.service.FuncionarioService;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -20,10 +20,13 @@ public class Principal {
     private static final BigDecimal SALARIO_MINIMO = new BigDecimal("1212.00");
 
     public static void main(String[] args) {
+
         FuncionarioService service = new FuncionarioService();
 
+        FuncionarioRepository repository = new FuncionarioRepository();
+
         // 3.1 - Inserir funcionários
-        List<Funcionario> funcionarios = inicializarFuncionarios();
+        List<Funcionario> funcionarios = repository.buscarTodos();
 
         // 3.2 - Remover funcionário "João"
         funcionarios.removeIf(f -> f.getNome().equalsIgnoreCase("João"));
@@ -76,22 +79,7 @@ public class Principal {
                     FORMATADOR_MOEDA.format(qtdSalarios)));
         }
     }
-
-    private static List<Funcionario> inicializarFuncionarios() {
-        List<Funcionario> lista = new ArrayList<>();
-        lista.add(new Funcionario("Maria", LocalDate.of(2000, 10, 18), "Operador", new BigDecimal("2009.44")));
-        lista.add(new Funcionario("João", LocalDate.of(1990, 5, 12), "Operador", new BigDecimal("2284.38")));
-        lista.add(new Funcionario("Caio", LocalDate.of(1961, 5, 2), "Coordenador", new BigDecimal("9836.14")));
-        lista.add(new Funcionario("Miguel", LocalDate.of(1988, 10, 14), "Diretor", new BigDecimal("19119.88")));
-        lista.add(new Funcionario("Alice", LocalDate.of(1995, 1, 5), "Recepcionista", new BigDecimal("2234.68")));
-        lista.add(new Funcionario("Heitor", LocalDate.of(1999, 11, 19), "Operador", new BigDecimal("1582.72")));
-        lista.add(new Funcionario("Arthur", LocalDate.of(1993, 3, 31), "Contador", new BigDecimal("4071.84")));
-        lista.add(new Funcionario("Laura", LocalDate.of(1994, 7, 8), "Gerente", new BigDecimal("3017.45")));
-        lista.add(new Funcionario("Heloísa", LocalDate.of(2003, 5, 24), "Eletricista", new BigDecimal("1606.85")));
-        lista.add(new Funcionario("Helena", LocalDate.of(1996, 9, 2), "Gerente", new BigDecimal("2799.93")));
-        return lista;
-    }
-
+    
     private static void imprimirTabelaFuncionarios(List<Funcionario> funcionarios) {
         for (Funcionario f : funcionarios) {
             System.out.println(String.format("Nome: %-10s | Data Nasc: %s | Função: %-13s | Salário: R$ %s",

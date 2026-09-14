@@ -1,4 +1,4 @@
-package br.com.service;
+package br.com.iniflex.service;
 
 import br.com.iniflex.model.Funcionario;
 
