@@ -1,7 +1,8 @@
 package br.com.iniflex;
 
 import br.com.iniflex.model.Funcionario;
-import br.com.iniflex.service.FuncionarioService;
+import br.com.service.FuncionarioService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
