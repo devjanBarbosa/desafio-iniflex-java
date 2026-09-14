@@ -22,4 +22,5 @@ jobs:
         cache: maven
 
     - name: Executar Testes Unitários
+      working-directory: ./iniflex-tech-challenge
       run: mvn -B test
