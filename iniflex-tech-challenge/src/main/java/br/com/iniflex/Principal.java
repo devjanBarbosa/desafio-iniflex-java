@@ -92,6 +92,17 @@ funcionarios.stream()
             System.out.println("Nome: " + maisVelho.getNome() + " | Idade: " + idade + " anos");
         });
 
+
+        // 3.10 - Imprimir funcionários em ordem alfabética
+System.out.println("\n--- FUNCIONÁRIOS EM ORDEM ALFABÉTICA ---");
+funcionarios.stream()
+        .sorted(Comparator.comparing(Funcionario::getNome))
+        .forEach(f -> System.out.println(String.format("Nome: %-10s | Data Nasc: %s | Função: %-13s | Salário: R$ %s",
+                f.getNome(),
+                f.getDataNascimento().format(formatadorData),
+                f.getFuncao(),
+                formatadorSalario.format(f.getSalario()))));
+
     }
 
     
