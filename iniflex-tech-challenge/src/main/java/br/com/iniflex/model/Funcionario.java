@@ -1,4 +1,6 @@
 package br.com.iniflex.model;
+import java.time.LocalDate;
+import java.math.BigDecimal;
 
 public class Funcionario extends Pessoa {
 
@@ -25,5 +27,15 @@ public Funcionario(String nome, LocalDate dataNascimento, String funcao, BigDeci
 
   public void setSalario(BigDecimal salario) {
     this.salario = salario;
+  }
+
+  @Override
+  public String toString() {
+    return "Funcionario{" +
+            "nome='" + getNome() + '\'' +
+            ", dataNascimento=" + getDataNascimento() +
+            ", funcao='" + funcao + '\'' +
+            ", salario=" + salario +
+            '}';
   }
 }
