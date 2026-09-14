@@ -5,8 +5,10 @@ import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -70,7 +72,25 @@ public class Principal {
             }
         }
 
-        
+        // 3.8 - Funcionários que fazem aniversário no mês 10 e 12
+System.out.println("\n--- ANIVERSARIANTES DOS MESES 10 E 12 ---");
+funcionarios.stream()
+        .filter(f -> {
+            int mes = f.getDataNascimento().getMonthValue();
+            return mes == 10 || mes == 12;
+        })
+        .forEach(f -> System.out.println(String.format("Nome: %-10s | Data Nasc: %s",
+                f.getNome(),
+                f.getDataNascimento().format(formatadorData))));
+
+// 3.9 - Funcionário com a maior idade (menor data de nascimento)
+System.out.println("\n--- FUNCIONÁRIO MAIS VELHO ---");
+funcionarios.stream()
+        .min(Comparator.comparing(Funcionario::getDataNascimento))
+        .ifPresent(maisVelho -> {
+            int idade = Period.between(maisVelho.getDataNascimento(), LocalDate.now()).getYears();
+            System.out.println("Nome: " + maisVelho.getNome() + " | Idade: " + idade + " anos");
+        });
 
     }
 
