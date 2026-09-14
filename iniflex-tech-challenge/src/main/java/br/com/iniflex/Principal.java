@@ -66,8 +66,7 @@ public class Principal {
                 System.out.println(String.format("  Nome: %-10s | Data Nasc: %s | Salário: R$ %s",
                         f.getNome(),
                         f.getDataNascimento().format(formatadorData),
-                 git add .
-git commit -m "feat: aplica reajuste salarial de 10% e agrupa funcionarios por funcao"       formatadorSalario.format(f.getSalario())));
+                        formatadorSalario.format(f.getSalario())));
             }
         }
 
