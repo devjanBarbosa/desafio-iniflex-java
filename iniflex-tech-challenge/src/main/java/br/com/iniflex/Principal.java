@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.math.RoundingMode;
 
 public class Principal {
     public static void main(String[] args) {
@@ -102,6 +103,26 @@ funcionarios.stream()
                 f.getDataNascimento().format(formatadorData),
                 f.getFuncao(),
                 formatadorSalario.format(f.getSalario()))));
+
+    
+                // 3.11 - Total dos salários de todos os funcionários
+BigDecimal totalSalarios = funcionarios.stream()
+        .map(Funcionario::getSalario)
+        .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+System.out.println("\n--- TOTAL DOS SALÁRIOS ---");
+System.out.println("Total: R$ " + formatadorSalario.format(totalSalarios));
+
+// 3.12 - Quantos salários mínimos ganha cada funcionário (Salário Mínimo = R$ 1.212,00)
+BigDecimal salarioMinimo = new BigDecimal("1212.00");
+
+System.out.println("\n--- SALÁRIOS MÍNIMOS POR FUNCIONÁRIO ---");
+for (Funcionario f : funcionarios) {
+    BigDecimal qtdSalariosMinimos = f.getSalario().divide(salarioMinimo, 2, RoundingMode.HALF_EVEN);
+    System.out.println(String.format("Nome: %-10s | Ganha: %s salários mínimos",
+            f.getNome(),
+            formatadorSalario.format(qtdSalariosMinimos)));
+}
 
     }
 
